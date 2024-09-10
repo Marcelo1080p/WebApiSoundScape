@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using SoundScape.Data;
+using SoundScape.Services.Artist;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +10,8 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddScoped<IArtistService, ArtistService>();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
