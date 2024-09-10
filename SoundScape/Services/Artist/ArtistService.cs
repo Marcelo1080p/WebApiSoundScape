@@ -89,6 +89,35 @@ namespace SoundScape.Services.Artist
             }
         }
 
-        
+        public async Task<ResponseModel<List<ArtistModel>>> UpdateArtist(EditArtistDto editArtistDto)
+        {
+            ResponseModel<List<ArtistModel>> response = new ResponseModel<List<ArtistModel>>();
+            try
+            {
+                var artist = await _context.Artists.
+                    FirstOrDefaultAsync(artistResponse =>  artistResponse.Id == editArtistDto.Id);
+                if (artist == null)
+                {
+                    response.Menssage = "Artist Not Found";
+                    return response ;
+                }
+                artist.Artist = editArtistDto.Artist;
+                artist.MusicalGenre = editArtistDto.MusicalGenre;
+
+                _context.Artists.Update(artist);
+                await _context.SaveChangesAsync();
+
+                response.Data = await _context.Artists.ToListAsync();
+                response.Menssage = "Update Artist with Success!";
+
+                return response;
+            }
+            catch (Exception ex) 
+            {
+                response.Menssage = ex.Message;
+                response.Status = false;
+                return response;
+            }
+        }
     }
 }

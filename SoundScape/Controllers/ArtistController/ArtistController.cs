@@ -25,10 +25,24 @@ namespace SoundScape.Controllers.ArtistController
             return Ok(artists);
         }
 
+        [HttpGet("GetArtistById{idArtist}")]
+        public async Task<ActionResult<ResponseModel<ArtistModel>>> GetArtistById(int idArtist)
+        {
+            var artist = await _artistService.GetArtistById(idArtist);
+            return Ok(artist);
+        }
+
         [HttpPost("AddNewArtist")]
         public async Task<ActionResult<ResponseModel<List<ArtistModel>>>> AddNewArtist(CreationArtistDto artistDto)
         {
             var artist = await _artistService.AddNewArtist(artistDto);
+            return Ok(artist);
+        }
+
+        [HttpPut("UpdateArtist")]
+        public async Task<ActionResult<ResponseModel<List<ArtistModel>>>> UpdateArtist(EditArtistDto editArtistDto)
+        {
+            var artist = await _artistService.UpdateArtist(editArtistDto);
             return Ok(artist);
         }
 
