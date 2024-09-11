@@ -22,7 +22,6 @@
 
   <ItemGroup>
     <Folder Include="Dto\Music\" />
-    <Folder Include="Services\Music\" />
   </ItemGroup>
 
 </Project>

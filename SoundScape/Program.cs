@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using SoundScape.Data;
 using SoundScape.Services.Artist;
+using SoundScape.Services.Music;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +13,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IArtistService, ArtistService>();
+builder.Services.AddScoped<IMusicService, MusicService>();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
 {

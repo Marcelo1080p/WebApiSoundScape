@@ -10,6 +10,7 @@ namespace SoundScape.Services.Artist
         Task<ResponseModel<ArtistModel>> GetArtistById(int idArtist);
         Task<ResponseModel<List<ArtistModel>>> AddNewArtist(CreationArtistDto artistDto);
         Task<ResponseModel<List<ArtistModel>>> UpdateArtist(EditArtistDto artistDto);
+        Task<ResponseModel<List<ArtistModel>>> DeleteArtist(int idArtist);
 
     }
 }

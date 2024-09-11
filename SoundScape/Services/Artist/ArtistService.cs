@@ -4,6 +4,7 @@ using SoundScape.Data;
 using SoundScape.Dto.Artist;
 using SoundScape.Models.Artist;
 using SoundScape.Models.ResponseModel;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace SoundScape.Services.Artist
 {
@@ -36,6 +37,33 @@ namespace SoundScape.Services.Artist
             catch (Exception ex) 
             {
                 response.Menssage = ex.Message;
+                response.Status = false;
+                return response;
+            }
+        }
+
+        public async Task<ResponseModel<List<ArtistModel>>> DeleteArtist(int idArtist)
+        {
+            ResponseModel<List<ArtistModel>> response = new ResponseModel<List<ArtistModel>>();
+            try
+            {
+                var artist = await _context.Artists.SingleOrDefaultAsync(artistResponse => artistResponse.Id == idArtist);
+                if (artist == null)
+                {
+                    response.Menssage = "Artists not found";
+                    return response;
+                }
+                _context.Remove(artist);
+                await _context.SaveChangesAsync();
+
+                response.Data = await _context.Artists.ToListAsync();
+                response.Menssage = "Artist removed successfully";
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Menssage = "Error deleting artist: " + ex.Message;
                 response.Status = false;
                 return response;
             }
