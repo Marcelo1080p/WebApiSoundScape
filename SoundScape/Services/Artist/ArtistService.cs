@@ -68,7 +68,7 @@ namespace SoundScape.Services.Artist
                 return response;
             }
         }
-
+         
         public async Task<ResponseModel<List<ArtistModel>>> GetAllArtist()
         {
             ResponseModel<List<ArtistModel>> response = new ResponseModel<List<ArtistModel>>();
